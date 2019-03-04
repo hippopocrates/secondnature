@@ -6,6 +6,7 @@ class HabitList extends Component {
     return (
       <div className="habit-list">
         <h1>Habit List</h1>
+        <Habit />
       </div>
     )
   }
