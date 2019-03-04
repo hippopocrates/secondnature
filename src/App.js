@@ -9,7 +9,7 @@ class App extends Component {
     this.state = {
       currentView: 'habits',
       completedHabits: [],
-      habits: []
+      wantingHabits: []
     }
   }
 
@@ -17,9 +17,59 @@ class App extends Component {
     fetch('http://localhost:3000/habits')
     .then(response => response.json())
     .then(jsonData => {
-      console.log(jsonData)
+      this.sortHabits(jsonData)
     })
     .catch(error => console.log(error))
+  }
+
+  //Creates a new task
+  handleCreateHabit = (habit) => {
+    fetch('http://localhost:3000/habits', {
+      body: JSON.stringify(habit),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdHabit => {
+      return createdHabit.json()
+    })
+    .then(jsonData => {
+      this.updateArray(jsonData, 'wantingHabits')
+    })
+    .catch(error => console.log(error))
+  }
+
+  //Update the state of array
+  updateArray = (habit, array) => {
+    this.setState(prevState => {
+      prevState[array].push(habit)
+      console.log(prevState)
+      return {
+        [array]: prevState[array]
+      }
+    })
+  }
+
+  sortHabits = (habits) => {
+    let completedHabits = []
+    let wantingHabits = []
+    habits.forEach((habit) => {
+      if(habit.completed) {
+        completedHabits.push(habit)
+      } else {
+        wantingHabits.push(habit)
+      }
+    })
+    this.setHabits(completedHabits, wantingHabits)
+  }
+
+  setHabits = (completed, wanting) => {
+    this.setState({
+      completedHabits: completed,
+      wantingHabits: wanting
+    })
   }
 
   componentDidMount () {
@@ -31,7 +81,9 @@ class App extends Component {
       <React.Fragment>
         <div className="main-container">
           <h1>Hello Caroline!</h1>
-          <Forms />
+          <Forms
+            handleCreateHabit = {this.handleCreateHabit}
+          />
           <h3>Morning Habits</h3>
             <HabitList />
           <h3>Afternoon Habits</h3>
