@@ -6,7 +6,9 @@
     "local-storage": "^1.4.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
-    "react-scripts": "2.1.5"
+    "react-modal": "^3.8.1",
+    "react-scripts": "2.1.5",
+    "the-noun-project": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
