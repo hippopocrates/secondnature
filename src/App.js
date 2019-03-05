@@ -81,6 +81,7 @@ class App extends Component {
     localStorage.setItem(
       this.state.currentView,
       JSON.stringify(todaysWantingHabits), JSON.stringify(todaysCompletedHabits)
+
     );
   };
   //Find the current view and set the data to that current view (in this case, it would be the current date)
