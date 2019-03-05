@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import HabitList from "./components/HabitList.js";
 import Forms from "./components/Forms.js";
 import DateHeader from "./components/DateHeader.js";
+// import Dashboard from "./components/Dashboard.js";
 import "./main.css";
 import ls from "local-storage";
 
@@ -61,11 +62,49 @@ class App extends Component {
     });
   };
 
+  //-------------------------//
+  //  FETCH HABITS FROM API  //
+  //-------------------------//
   fetchHabits = () => {
     fetch("http://localhost:3000/habits")
       .then(response => response.json())
       .then(jsonData => {
         this.sortHabits(jsonData);
+      })
+      .catch(error => console.log(error));
+  };
+
+  //----------------------//
+  //  CREATE A NEW HABIT  //
+  //----------------------//
+  handleCreateHabit = habit => {
+    fetch("http://localhost:3000/habits", {
+      body: JSON.stringify(habit),
+      method: "POST",
+      headers: {
+        Accept: "application/json, text/plain, */*",
+        "Content-Type": "application/json"
+      }
+    })
+      .then(createdHabit => {
+        return createdHabit.json();
+      })
+      .then(jsonData => {
+        this.updateArray(jsonData, "wantingHabits");
+      })
+      .catch(error => console.log(error));
+  };
+
+  //-------------------//
+  //  DELETES A HABIT  //
+  //-------------------//
+  //Need to figure out how to delete from either array regardless of where the data is located
+  handleDelete = (habitId, arrayIndex, currentArray) => {
+    fetch("http://localhost:3000/habits/" + habitId, {
+      method: "DELETE"
+    })
+      .then(data => {
+        this.removeFromArray(currentArray, arrayIndex);
       })
       .catch(error => console.log(error));
   };
@@ -78,7 +117,7 @@ class App extends Component {
     console.log(habit);
     fetch("http://localhost:3000/habits/" + habit.id, {
       body: JSON.stringify(habit),
-      method: "POST",
+      method: "PUT",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json"
@@ -109,7 +148,9 @@ class App extends Component {
     });
   };
 
-  //Update the state of array
+  //--------------------------//
+  //  UPDATE ARRAY WITH HABIT //
+  //--------------------------//
   updateArray = (habit, array) => {
     this.setState(prevState => {
       prevState[array].push(habit);
@@ -120,6 +161,9 @@ class App extends Component {
     });
   };
 
+  //----------------------------------//
+  //  SORT HABITS: COMPLETED/WANTING  //
+  //----------------------------------//
   sortHabits = habits => {
     let completedHabits = [];
     let wantingHabits = [];
@@ -133,6 +177,9 @@ class App extends Component {
     this.setHabits(completedHabits, wantingHabits);
   };
 
+  //--------------//
+  //  SET HABITS  //
+  //--------------//
   setHabits = (completed, wanting) => {
     this.setState({
       completedHabits: completed,
