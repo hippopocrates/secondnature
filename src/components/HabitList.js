@@ -5,9 +5,23 @@ class HabitList extends Component {
   render() {
     return (
       <div className="habit-list">
-        {this.props.wantingHabits ? (
+        <div>
+          {this.props.wantingHabits.map((habit, index) => {
+            return (
+              <Habit
+                key={index}
+                habit={habit}
+                arrayIndex={index}
+                handleCheck={this.props.handleCheck}
+                handleDelete={this.props.handleDelete}
+                currentArray="wantingHabits"
+              />
+            )
+          })}
+          </div>
           <div>
-            {this.props.wantingHabits.map((habit, index) => {
+            <h3>Completed for Today</h3>
+            {this.props.completedHabits.map((habit, index) => {
               return (
                 <Habit
                   key={index}
@@ -15,16 +29,13 @@ class HabitList extends Component {
                   arrayIndex={index}
                   handleCheck={this.props.handleCheck}
                   handleDelete={this.props.handleDelete}
-                  currentArray="wantingHabits"
+                  currentArray="completedHabits"
                 />
               )
             })}
           </div>
-        ) : (
-          ""
-        )}
-      </div>
-    );
+        </div>
+    )
   }
 }
 

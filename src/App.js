@@ -9,7 +9,10 @@ class App extends Component {
     this.state = {
       currentView: 'all-habits',
       completedHabits: [],
-      wantingHabits: []
+      wantingHabits: [],
+      currentMonth: '',
+      currentDay: '',
+      currentYear: ''
     }
   }
   //-------------------------------//
@@ -17,6 +20,20 @@ class App extends Component {
   //-------------------------------//
   handleView = (view) => {
     this.setState({ currentView: view })
+  }
+
+  //-------------------------//
+  //  RETRIEVE CURRENT DATE  //
+  //-------------------------//
+  getDate = () => {
+    let currentDay = new Date().toJSON().slice(5,7)
+    let currentMonth = new Date().toJSON().slice(8,10)
+    let currentYear = new Date().toJSON().slice(0,4)
+    this.setState({
+      currentDay: currentDay,
+      currentMonth: currentMonth,
+      currentYear: currentYear
+    })
   }
 
   //-------------------------//
@@ -72,7 +89,7 @@ class App extends Component {
   handleCheck = (habit, arrayIndex, currentArray) => {
     habit.completed = !habit.completed
     console.log(habit)
-    fetch('http//localhost:3000/habits/' + habit.id, {
+    fetch('http://localhost:3000/habits/' + habit.id, {
       body: JSON.stringify(habit),
       method: 'PUT',
       headers: {
@@ -149,6 +166,7 @@ class App extends Component {
   //-------------------//
   componentDidMount () {
     this.fetchHabits()
+    this.getDate()
   }
 
   render() {
@@ -162,9 +180,10 @@ class App extends Component {
           <h3>Habits for Today</h3>
             <HabitList
               wantingHabits={this.state.wantingHabits}
+              completedHabits={this.state.completedHabits}
               handleCheck={this.handleCheck}
               handleDelete={this.handleDelete}
-
+              currentView={this.state.currentView}
             />
         </div>
       </React.Fragment>
