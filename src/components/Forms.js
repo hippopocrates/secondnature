@@ -17,9 +17,9 @@ class Forms extends Component {
     this.setState({ habit_item: c.target.value})
   }
 
-  //----------------//
-  //  HANDLE SUBMIT //
-  //----------------//
+  //-----------------//
+  //  HANDLE SUBMIT  //
+  //-----------------//
   // Handles any submit function via the form; runs handleCreateHabit function which creates new habit
   handleSubmit = (s) => {
     s.preventDefault()
