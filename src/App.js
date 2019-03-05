@@ -52,15 +52,33 @@ class App extends Component {
     this.setState({
       currentDay: prevDay,
       currentView: fullDate
-    });
-  };
+
+    })
+    this.setValue()
+  }
   nextDay = () => {
-    let nextDay =
-      this.state.currentDay + 1 <= 30 ? this.state.currentDay + 1 : 1;
+    let nextDay = this.state.currentDay+1 <= 30 ? this.state.currentDay+1 : 1
+    let fullDate = this.state.currentMonth+"/"+nextDay+"/"+this.state.currentYear
     this.setState({
-      currentDay: nextDay
-    });
-  };
+      currentDay: nextDay,
+      currentView: fullDate
+    })
+    this.setValue()
+  }
+
+  //-------------------------------//
+  //  RETRIEVE FROM LOCAL STORAGE  //
+  //-------------------------------//
+  setValue = () => {
+    let todaysWantingHabits = this.state.wantingHabits
+    localStorage.setItem(this.state.currentView, JSON.stringify(todaysWantingHabits))
+  }
+  //Find the current view and set the data to that current view (in this case, it would be the current date)
+  retrieveDaysHabits = () => {
+    let retrievedHabits = localStorage.getItem(this.state.currentView)
+    console.log(retrievedHabits)
+  }
+  //Retrieve storage if you change the date you are displaying on the page
 
   //-------------------------//
   //  FETCH HABITS FROM API  //
@@ -201,7 +219,12 @@ class App extends Component {
         <div className="main-container">
           <h1>Second Nature</h1>
           <h5>Tracking your daily habits to help you live your best life!</h5>
-          <Forms handleCreateHabit={this.handleCreateHabit} />
+          <button onClick={() => {
+            this.retrieveDaysHabits()
+          }}>Retrieve Test</button>
+          <Forms
+            handleCreateHabit = {this.handleCreateHabit}
+          />
           <DateHeader
             day={this.state.currentDay}
             month={this.state.currentMonth}
