@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import HabitList from "./components/HabitList.js";
 import Forms from "./components/Forms.js";
 import DateHeader from "./components/DateHeader.js";
-// import Dashboard from "./components/Dashboard.js";
+import Dashboard from "./components/Dashboard.js";
 import "./main.css";
-import ls from "local-storage";
+// import ls from "local-storage";
 
 class App extends Component {
   constructor(props) {
@@ -52,36 +52,43 @@ class App extends Component {
     this.setState({
       currentDay: prevDay,
       currentView: fullDate
-
-    })
-    this.setValue()
-  }
+    });
+    this.setValue();
+  };
   nextDay = () => {
-    let nextDay = this.state.currentDay+1 <= 30 ? this.state.currentDay+1 : 1
-    let fullDate = this.state.currentMonth+"/"+nextDay+"/"+this.state.currentYear
+    let nextDay =
+      this.state.currentDay + 1 <= 30 ? this.state.currentDay + 1 : 1;
+    let fullDate =
+      this.state.currentMonth + "/" + nextDay + "/" + this.state.currentYear;
     this.setState({
       currentDay: nextDay,
       currentView: fullDate
-    })
-    this.setValue()
-  }
+    });
+    this.setValue();
+  };
 
   //-------------------------------//
   //  RETRIEVE FROM LOCAL STORAGE  //
   //-------------------------------//
   setValue = () => {
-    if (JSON.stringify(this.state.currentView) == localStorage.getItem(this.state.currentView)) {
-      console.log("This is not the same date")
+    if (
+      JSON.stringify(this.state.currentView) ==
+      localStorage.getItem(this.state.currentView)
+    ) {
+      console.log("This is not the same date");
     }
-    let todaysWantingHabits = this.state.wantingHabits
-    localStorage.setItem(this.state.currentView, JSON.stringify(todaysWantingHabits))
-  }
+    let todaysWantingHabits = this.state.wantingHabits;
+    localStorage.setItem(
+      this.state.currentView,
+      JSON.stringify(todaysWantingHabits)
+    );
+  };
   //Find the current view and set the data to that current view (in this case, it would be the current date)
   retrieveDaysHabits = () => {
-    let retrievedHabits = localStorage.getItem(this.state.currentView)
-    this.sortHabits(JSON.parse(retrievedHabits))
-    console.log(JSON.parse(retrievedHabits))
-  }
+    let retrievedHabits = localStorage.getItem(this.state.currentView);
+    this.sortHabits(JSON.parse(retrievedHabits));
+    console.log(JSON.parse(retrievedHabits));
+  };
   //Retrieve storage if you change the date you are displaying on the page
 
   //-------------------------//
@@ -222,13 +229,16 @@ class App extends Component {
       <React.Fragment>
         <div className="main-container">
           <h1>Second Nature</h1>
+          <Dashboard />
           <h5>Tracking your daily habits to help you live your best life!</h5>
-          <button onClick={() => {
-            this.retrieveDaysHabits()
-          }}>Retrieve Test</button>
-          <Forms
-            handleCreateHabit = {this.handleCreateHabit}
-          />
+          <button
+            onClick={() => {
+              this.retrieveDaysHabits();
+            }}
+          >
+            Retrieve Test
+          </button>
+          <Forms handleCreateHabit={this.handleCreateHabit} />
           <DateHeader
             day={this.state.currentDay}
             month={this.state.currentMonth}
