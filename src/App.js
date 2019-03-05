@@ -159,12 +159,13 @@ class App extends Component {
           <Forms
             handleCreateHabit = {this.handleCreateHabit}
           />
-          <h3>Morning Habits</h3>
-            <HabitList />
-          <h3>Afternoon Habits</h3>
-            <HabitList />
-          <h3>Evening Habits</h3>
-            <HabitList />
+          <h3>Habits for Today</h3>
+            <HabitList
+              wantingHabits={this.state.wantingHabits}
+              handleCheck={this.handleCheck}
+              handleDelete={this.handleDelete}
+
+            />
         </div>
       </React.Fragment>
     );
