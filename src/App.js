@@ -4,6 +4,7 @@ import Forms from "./components/Forms.js";
 import DateHeader from "./components/DateHeader.js";
 // import Dashboard from "./components/Dashboard.js";
 import "./main.css";
+import Title from './components/Title.js'
 // import ls from "local-storage";
 
 class App extends Component {
@@ -137,9 +138,9 @@ class App extends Component {
       .catch(error => console.log(error));
   };
 
-  //-------------------//
-  //  UPDATES A HABIT  //
-  //-------------------//
+  //---------------------------------------------//
+  //  CHANGES HABIT FROM COMPLETE TO INCOMPLETE  //
+  //---------------------------------------------//
   handleCheck = (habit, arrayIndex, currentArray) => {
     habit.completed = !habit.completed;
     console.log(habit);
@@ -227,15 +228,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className="main-container">
-          <h1>Second Nature</h1>
-          <h5>Tracking your daily habits to help you live your best life!</h5>
-          <button
-            onClick={() => {
-              this.retrieveDaysHabits();
-            }}
-          >
-            Retrieve Test
-          </button>
+          <Title />
           <Forms handleCreateHabit={this.handleCreateHabit} />
           <DateHeader
             day={this.state.currentDay}
@@ -252,6 +245,7 @@ class App extends Component {
             currentView={this.state.currentView}
           />
         </div>
+        <hr/>
       </React.Fragment>
     );
   }
