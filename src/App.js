@@ -3,12 +3,13 @@ import HabitList from './components/HabitList.js'
 import Forms from './components/Forms.js'
 import DateHeader from './components/DateHeader.js'
 import './main.css'
+import ls from 'local-storage'
 
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      currentView: 'all-habits',
+      currentView: '',
       completedHabits: [],
       wantingHabits: [],
       currentMonth: '',
@@ -30,10 +31,30 @@ class App extends Component {
     let currentDay = new Date().toJSON().slice(8,10)
     let currentMonth = new Date().toJSON().slice(5,7)
     let currentYear = new Date().toJSON().slice(0,4)
+    let fullDate = currentMonth+"/"+currentDay+"/"+currentYear
     this.setState({
+      currentView: fullDate,
       currentDay: currentDay,
       currentMonth: currentMonth,
       currentYear: currentYear
+    })
+  }
+
+  //---------------------//
+  //  CHANGE HABIT DATE  //
+  //---------------------//
+  previousDay = () => {
+    let prevDay = this.state.currentDay-1 >= 1 ? this.state.currentDay-1 : 30
+    let fullDate = this.state.currentMonth+"/"+prevDay+"/"+this.state.currentYear
+    this.setState({
+      currentDay: prevDay,
+      currentView: fullDate
+    })
+  }
+  nextDay = () => {
+    let nextDay = this.state.currentDay+1 <= 30 ? this.state.currentDay+1 : 1
+    this.setState({
+      currentDay: nextDay
     })
   }
 
@@ -183,6 +204,8 @@ class App extends Component {
             day={this.state.currentDay}
             month={this.state.currentMonth}
             year={this.state.currentYear}
+            previousDay={this.previousDay}
+            nextDay={this.nextDay}
           />
           <h3>Habits for Today</h3>
             <HabitList
