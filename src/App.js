@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HabitList from './components/HabitList.js'
 import Forms from './components/Forms.js'
+import DateHeader from './components/DateHeader.js'
 import './main.css'
 
 class App extends Component {
@@ -26,8 +27,8 @@ class App extends Component {
   //  RETRIEVE CURRENT DATE  //
   //-------------------------//
   getDate = () => {
-    let currentDay = new Date().toJSON().slice(5,7)
-    let currentMonth = new Date().toJSON().slice(8,10)
+    let currentDay = new Date().toJSON().slice(8,10)
+    let currentMonth = new Date().toJSON().slice(5,7)
     let currentYear = new Date().toJSON().slice(0,4)
     this.setState({
       currentDay: currentDay,
@@ -173,9 +174,15 @@ class App extends Component {
     return (
       <React.Fragment>
         <div className="main-container">
-          <h1>Hello Caroline!</h1>
+          <h1>Second Nature</h1>
+          <h5>Tracking your daily habits to help you live your best life!</h5>
           <Forms
             handleCreateHabit = {this.handleCreateHabit}
+          />
+          <DateHeader
+            day={this.state.currentDay}
+            month={this.state.currentMonth}
+            year={this.state.currentYear}
           />
           <h3>Habits for Today</h3>
             <HabitList
