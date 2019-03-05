@@ -7,10 +7,16 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      currentView: 'habits',
+      currentView: 'all-habits',
       completedHabits: [],
       wantingHabits: []
     }
+  }
+  //-------------------------------//
+  //  HANDLE VIEW OF HABITS LISTS  //
+  //-------------------------------//
+  handleView = (view) => {
+    this.setState({ currentView: view })
   }
 
   //-------------------------//
@@ -90,8 +96,14 @@ class App extends Component {
   //---------------------------//
   //  REMOVE HABIT FROM ARRAY  //
   //---------------------------//
-  
-
+  removeFromArray = (array, arrayIndex) => {
+    this.setState(prevState => {
+      prevState[array].splice(arrayIndex, 1)
+      return {
+        [array]: prevState[array]
+      }
+    })
+  }
 
   //--------------------------//
   //  UPDATE ARRAY WITH HABIT //
