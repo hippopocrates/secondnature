@@ -246,7 +246,6 @@ class App extends Component {
             previousDay={this.previousDay}
             nextDay={this.nextDay}
           />
-          <h3>Habits for Today</h3>
           <HabitList
             wantingHabits={this.state.wantingHabits}
             completedHabits={this.state.completedHabits}
