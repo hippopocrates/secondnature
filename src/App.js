@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import HabitList from "./components/HabitList.js";
 import Forms from "./components/Forms.js";
 import DateHeader from "./components/DateHeader.js";
-// import Dashboard from "./components/Dashboard.js";
+import Dashboard from "./components/Dashboard.js";
 import "./main.css";
 // import ls from "local-storage";
 
@@ -80,6 +80,7 @@ class App extends Component {
     localStorage.setItem(
       this.state.currentView,
       JSON.stringify(todaysWantingHabits), JSON.stringify(todaysCompletedHabits)
+
     );
   };
   //Find the current view and set the data to that current view (in this case, it would be the current date)
@@ -228,6 +229,7 @@ class App extends Component {
       <React.Fragment>
         <div className="main-container">
           <h1>Second Nature</h1>
+          <Dashboard />
           <h5>Tracking your daily habits to help you live your best life!</h5>
           <button
             onClick={() => {
