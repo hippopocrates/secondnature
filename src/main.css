@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Srisakdi');
+
 h1 {
   color: cornflowerblue;
+  font-family: 'Srisakdi', cursive;
 }
