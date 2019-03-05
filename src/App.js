@@ -70,13 +70,17 @@ class App extends Component {
   //  RETRIEVE FROM LOCAL STORAGE  //
   //-------------------------------//
   setValue = () => {
+    if (JSON.stringify(this.state.currentView) == localStorage.getItem(this.state.currentView)) {
+      console.log("This is not the same date")
+    }
     let todaysWantingHabits = this.state.wantingHabits
     localStorage.setItem(this.state.currentView, JSON.stringify(todaysWantingHabits))
   }
   //Find the current view and set the data to that current view (in this case, it would be the current date)
   retrieveDaysHabits = () => {
     let retrievedHabits = localStorage.getItem(this.state.currentView)
-    console.log(retrievedHabits)
+    this.sortHabits(JSON.parse(retrievedHabits))
+    console.log(JSON.parse(retrievedHabits))
   }
   //Retrieve storage if you change the date you are displaying on the page
 
