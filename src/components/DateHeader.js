@@ -5,12 +5,15 @@ class DateHeader extends Component {
     return (
       <React.Fragment>
         <h2>
-          <button onClick={() => {
+          {/*<button onClick={() => {
             this.props.previousDay()
           }}>Yesterday</button>
           ---{this.props.month}/{this.props.day}/{this.props.year}---<button onClick={() => {
             this.props.nextDay()
-          }}>Tomorrow</button>
+          }}>Tomorrow</button>*/}
+
+          {this.props.month}/{this.props.day}/{this.props.year}
+          
         </h2>
       </React.Fragment>
     )

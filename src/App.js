@@ -71,16 +71,16 @@ class App extends Component {
   //  RETRIEVE FROM LOCAL STORAGE  //
   //-------------------------------//
   setValue = () => {
-    if (
-      JSON.stringify(this.state.currentView) ==
-      localStorage.getItem(this.state.currentView)
-    ) {
-      console.log("This is not the same date");
-    }
-    let todaysWantingHabits = this.state.wantingHabits;
+    let todaysWantingHabits = localStorage.getItem('this.state.currentView')
+      ? ''
+      : this.state.wantingHabits
+    let todaysCompletedHabits = localStorage.getItem('this.state.currentView')
+      ? ''
+      : this.state.completedHabits
     localStorage.setItem(
       this.state.currentView,
-      JSON.stringify(todaysWantingHabits)
+      JSON.stringify(todaysWantingHabits), JSON.stringify(todaysCompletedHabits)
+
     );
   };
   //Find the current view and set the data to that current view (in this case, it would be the current date)
