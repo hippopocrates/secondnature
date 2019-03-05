@@ -13,7 +13,7 @@ class Habit extends Component {
                     this.props.habit,
                     this.props.arrayIndex,
                     this.props.currentArray
-                  );
+                  )
                 }}
               >
                 {this.props.habit.completed === false ? "Complete" : "Incomplete"}
