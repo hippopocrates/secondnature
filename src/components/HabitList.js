@@ -5,7 +5,8 @@ class HabitList extends Component {
   render() {
     return (
       <div className="habit-list">
-        <div>
+        <div className="wanting-habits-list">
+          <h3>Today's Habits</h3>
           {this.props.wantingHabits.map((habit, index) => {
             return (
               <Habit
@@ -19,8 +20,8 @@ class HabitList extends Component {
             );
           })}
         </div>
-        <div>
-          <h3>Completed for Today</h3>
+        <div className="completed-habits-list">
+          <h3>Completed Habits</h3>
           {this.props.completedHabits.map((habit, index) => {
             return (
               <Habit
