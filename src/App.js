@@ -96,7 +96,7 @@ class App extends Component {
   //  FETCH HABITS FROM API  //
   //-------------------------//
   fetchHabits = () => {
-    fetch("http://localhost:3000/habits")
+    fetch("DATABASE_URL")
       .then(response => response.json())
       .then(jsonData => {
         this.sortHabits(jsonData);
@@ -108,7 +108,7 @@ class App extends Component {
   //  CREATE A NEW HABIT  //
   //----------------------//
   handleCreateHabit = habit => {
-    fetch("http://localhost:3000/habits", {
+    fetch("DATABASE_URL", {
       body: JSON.stringify(habit),
       method: "POST",
       headers: {
@@ -130,7 +130,7 @@ class App extends Component {
   //-------------------//
   //Need to figure out how to delete from either array regardless of where the data is located
   handleDelete = (habitId, arrayIndex, currentArray) => {
-    fetch("http://localhost:3000/habits/" + habitId, {
+    fetch("DATABASE_URL/" + habitId, {
       method: "DELETE"
     })
       .then(data => {
@@ -145,7 +145,7 @@ class App extends Component {
   handleCheck = (habit, arrayIndex, currentArray) => {
     habit.completed = !habit.completed;
     console.log(habit);
-    fetch("http://localhost:3000/habits/" + habit.id, {
+    fetch("DATABASE_URL/" + habit.id, {
       body: JSON.stringify(habit),
       method: "PUT",
       headers: {
