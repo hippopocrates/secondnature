@@ -12,6 +12,7 @@ class App extends Component {
     super(props);
     this.state = {
       currentView: "",
+      edit: true,
       completedHabits: [],
       wantingHabits: [],
       currentMonth: "",
@@ -165,6 +166,17 @@ class App extends Component {
         }
       });
   };
+  //-----------------//
+  //  UPDATES HABIT  //
+  //-----------------//
+  handleUpdate = () => {
+    this.setState({
+      edit: !this.state.edit
+    })
+    console.log(this.state.edit)
+  }
+
+
 
   //---------------------------//
   //  REMOVE HABIT FROM ARRAY  //
@@ -244,6 +256,7 @@ class App extends Component {
             handleCheck={this.handleCheck}
             handleDelete={this.handleDelete}
             currentView={this.state.currentView}
+            handleUpdate={this.handleUpdate}
           />
         </div>
         <hr/>

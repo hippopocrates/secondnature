@@ -16,6 +16,7 @@ class HabitList extends Component {
                 handleCheck={this.props.handleCheck}
                 handleDelete={this.props.handleDelete}
                 currentArray="wantingHabits"
+                handleUpdate={this.props.handleUpdate}
               />
             );
           })}
