@@ -2,9 +2,8 @@ import React, { Component } from "react";
 import HabitList from "./components/HabitList.js";
 import Forms from "./components/Forms.js";
 import DateHeader from "./components/DateHeader.js";
-// import Dashboard from "./components/Dashboard.js";
 import "./main.css";
-import Title from './components/Title.js'
+import Title from "./components/Title.js";
 // import ls from "local-storage";
 
 class App extends Component {
@@ -72,16 +71,16 @@ class App extends Component {
   //  RETRIEVE FROM LOCAL STORAGE  //
   //-------------------------------//
   setValue = () => {
-    let todaysWantingHabits = localStorage.getItem('this.state.currentView')
-      ? ''
-      : this.state.wantingHabits
-    let todaysCompletedHabits = localStorage.getItem('this.state.currentView')
-      ? ''
-      : this.state.completedHabits
+    let todaysWantingHabits = localStorage.getItem("this.state.currentView")
+      ? ""
+      : this.state.wantingHabits;
+    let todaysCompletedHabits = localStorage.getItem("this.state.currentView")
+      ? ""
+      : this.state.completedHabits;
     localStorage.setItem(
       this.state.currentView,
-      JSON.stringify(todaysWantingHabits), JSON.stringify(todaysCompletedHabits)
-
+      JSON.stringify(todaysWantingHabits),
+      JSON.stringify(todaysCompletedHabits)
     );
   };
   //Find the current view and set the data to that current view (in this case, it would be the current date)
@@ -230,7 +229,6 @@ class App extends Component {
       <React.Fragment>
         <div className="main-container">
           <Title />
-          <Forms handleCreateHabit={this.handleCreateHabit} />
           <DateHeader
             day={this.state.currentDay}
             month={this.state.currentMonth}
@@ -238,6 +236,8 @@ class App extends Component {
             previousDay={this.previousDay}
             nextDay={this.nextDay}
           />
+          <Forms handleCreateHabit={this.handleCreateHabit} />
+
           <HabitList
             wantingHabits={this.state.wantingHabits}
             completedHabits={this.state.completedHabits}
@@ -246,7 +246,7 @@ class App extends Component {
             currentView={this.state.currentView}
           />
         </div>
-        <hr/>
+        <hr />
       </React.Fragment>
     );
   }

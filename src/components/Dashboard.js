@@ -12,8 +12,6 @@ const customStyles = {
   }
 };
 
-// Modal.setAppElement("#yourAppElement");
-
 class Dashboard extends Component {
   constructor() {
     super();
@@ -33,7 +31,7 @@ class Dashboard extends Component {
 
   afterOpenModal() {
     // references are now sync'd and can be accessed.
-    this.subtitle.style.color = "#f00";
+    this.subtitle.style.color = "cornflowerblue";
   }
 
   closeModal() {
@@ -45,21 +43,103 @@ class Dashboard extends Component {
       <div>
         <button onClick={this.openModal}>search icon</button>
         <Modal
+          id="modal"
           isOpen={this.state.modalIsOpen}
           onAfterOpen={this.afterOpenModal}
           onRequestClose={this.closeModal}
           style={customStyles}
-          contentLabel="Example Modal"
+          contentLabel="Habit Modal"
         >
-          <h2 ref={subtitle => (this.subtitle = subtitle)}>
-            Habit Icon Selection
-          </h2>
-          <form>
-            <input />
-            <button>search</button>
-            <button>submit</button>
+          <div className="modal-window">
+            <h2
+              className="modal-title"
+              ref={subtitle => (this.subtitle = subtitle)}
+            >
+              Habit Icon Selection
+            </h2>
+            <div className="cards">
+              <div className="card">
+                <img
+                  src="/img/book.png"
+                  alt="book"
+                  onClick={() => {
+                    this.props.icon("/img/book.png");
+                  }}
+                />
+              </div>
+
+              <div className="card">
+                <img
+                  src="/img/code.png"
+                  alt="code"
+                  onClick={() => {
+                    this.props.icon("/img/code.png");
+                  }}
+                />
+              </div>
+
+              <div className="card">
+                <img
+                  src="/img/fitness.png"
+                  alt="fitness"
+                  onClick={() => {
+                    this.props.icon("/img/fitness.png");
+                  }}
+                />
+              </div>
+
+              <div className="card">
+                <img
+                  src="/img/water.png"
+                  alt="water"
+                  onClick={() => {
+                    this.props.icon("/img/water.png");
+                  }}
+                />
+              </div>
+
+              <div className="card">
+                <img
+                  src="/img/healthy.png"
+                  alt="healthy"
+                  onClick={() => {
+                    this.props.icon("/img/healthy.png");
+                  }}
+                />
+              </div>
+
+              <div className="card">
+                <img
+                  src="/img/heart.png"
+                  alt="heart"
+                  onClick={() => {
+                    this.props.icon("/img/heart.png");
+                  }}
+                />
+              </div>
+
+              <div className="card">
+                <img
+                  src="/img/star.png"
+                  alt="star"
+                  onClick={() => {
+                    this.props.icon("/img/star.png");
+                  }}
+                />
+              </div>
+
+              <div className="card">
+                <img
+                  src="/img/meditate.png"
+                  alt="meditate"
+                  onClick={() => {
+                    this.props.icon("/img/meditate.png");
+                  }}
+                />
+              </div>
+            </div>
             <button onClick={this.closeModal}>close</button>
-          </form>
+          </div>
         </Modal>
       </div>
     );
