@@ -1,12 +1,13 @@
 import React, { Component } from "react";
+import Dashboard from "./Dashboard.js";
 
 class Forms extends Component {
   constructor(props) {
     super(props);
     this.state = {
       habit_item: "",
-      icon: "",
-      completed: false
+      completed: false,
+      icon: ""
     };
   }
 
@@ -20,12 +21,15 @@ class Forms extends Component {
   handleChangeIcon = c => {
     this.setState({ icon: c.target.value });
   };
+  handleChangeIcon2 = c => {
+    this.setState({ icon: c });
+  };
   //-----------------//
   //  HANDLE SUBMIT  //
   //-----------------//
   // Handles any submit function via the form; runs handleCreateHabit function which creates new habit
   handleSubmit = s => {
-    s.preventDefault();
+    // s.preventDefault();
     this.props.handleCreateHabit(this.state);
     this.clearForm();
   };
@@ -40,25 +44,23 @@ class Forms extends Component {
 
   render() {
     return (
-      <div className="forms">
-        <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            placeholder="Create New Habit"
-            onChange={this.handleChange}
-            value={this.state.habit_item}
-          />
-          <input
-            type="text"
-            placeholder="Icon URL"
-            onChange={this.handleChangeIcon}
-            value={this.state.icon}
-          />
-
-          <button type="submit" className="submit-button">
-            Submit
-          </button>
-        </form>
+      <div className="form">
+        <input
+          type="text"
+          placeholder="Create New Habit"
+          onChange={this.handleChange}
+          value={this.state.habit_item}
+        />
+        <input
+          type="text"
+          placeholder="Icon URL"
+          onChange={this.handleChangeIcon}
+          value={this.state.icon}
+        />
+        <Dashboard icon={this.handleChangeIcon2} />
+        <button onClick={this.handleSubmit} className="submit-button">
+          submit
+        </button>
       </div>
     );
   }
