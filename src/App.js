@@ -96,7 +96,7 @@ class App extends Component {
   //  FETCH HABITS FROM API  //
   //-------------------------//
   fetchHabits = () => {
-    fetch("DATABASE_URL")
+    fetch("https://secondnature-api-5.herokuapp.com/habits")
       .then(response => response.json())
       .then(jsonData => {
         this.sortHabits(jsonData);
@@ -108,7 +108,7 @@ class App extends Component {
   //  CREATE A NEW HABIT  //
   //----------------------//
   handleCreateHabit = habit => {
-    fetch("DATABASE_URL", {
+    fetch("https://secondnature-api-5.herokuapp.com/habits", {
       body: JSON.stringify(habit),
       method: "POST",
       headers: {
@@ -130,7 +130,7 @@ class App extends Component {
   //-------------------//
   //Need to figure out how to delete from either array regardless of where the data is located
   handleDelete = (habitId, arrayIndex, currentArray) => {
-    fetch("DATABASE_URL/" + habitId, {
+    fetch("https://secondnature-api-5.herokuapp.com/habits/" + habitId, {
       method: "DELETE"
     })
       .then(data => {
@@ -145,7 +145,7 @@ class App extends Component {
   handleCheck = (habit, arrayIndex, currentArray) => {
     habit.completed = !habit.completed;
     console.log(habit);
-    fetch("DATABASE_URL/" + habit.id, {
+    fetch("https://secondnature-api-5.herokuapp.com/habits/" + habit.id, {
       body: JSON.stringify(habit),
       method: "PUT",
       headers: {
